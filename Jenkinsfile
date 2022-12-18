@@ -43,7 +43,7 @@ pipeline{
        stage('verify'){
         steps{
             sh '''
-            aws ecs wait services-stable --region us-east-1 --cluster vote --tasks vote:v${BUILD_NUMBER}'''
+            aws ecs wait services-stable --region us-east-1 --cluster vote-app --service vote'''
         }
        } 
     }
