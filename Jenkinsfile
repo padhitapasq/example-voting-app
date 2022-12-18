@@ -40,6 +40,12 @@ pipeline{
             aws ecs update-service --region us-east-1 --cluster vote-app --service vote  --task-definition vote:${NEW_REVISION}'''
         }
        } 
+       stage('verify'){
+        steps{
+            sh '''
+            aws ecs wait services-stable --region us-east-1 --cluster vote --tasks vote:v${BUILD_NUMBER}'''
+        }
+       } 
     }
     post{
         always{
